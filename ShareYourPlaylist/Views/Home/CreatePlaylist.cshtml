@@ -1,0 +1,68 @@
+﻿@model ShareYourPlaylist.Models.CreatePlaylistViewModel
+
+@{
+    ViewData["Title"] = "Create a New Playlist";
+}
+
+<h2 class="mt-5">Create a New Playlist</h2>
+
+<form asp-action="CreatePlaylist" method="post" enctype="multipart/form-data" class="mt-4 mb-5 p-4" style="background-color: #f8f9fa; border-radius: 8px;">
+    <div class="form-group mb-4">
+        <label asp-for="Name" class="font-weight-bold">Playlist Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter playlist name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-4">
+        <label asp-for="ImageFile" class="font-weight-bold">Playlist Image (optional)</label>
+        <input asp-for="ImageFile" type="file" class="form-control-file" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg mt-3">Create Playlist</button>
+</form>
+
+<a asp-action="Playlists" class="btn btn-secondary btn-lg">Back to Playlists</a>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    /* Custom styling for form layout */
+    h2 {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    form {
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .form-group label {
+        font-size: 1.2rem;
+        color: #000; /* Set label color to black */
+    }
+
+    .form-control, .form-control-file {
+        padding: 10px;
+        font-size: 1.1rem;
+    }
+
+    .form-control-file {
+        color: #000; /* Set file input text color to black */
+    }
+
+    .btn {
+        width: 100%;
+        font-size: 1.1rem;
+    }
+
+    .btn-secondary {
+        margin-top: 10px;
+        width: auto;
+    }
+</style>

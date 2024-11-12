@@ -1,0 +1,56 @@
+﻿@model ShareYourPlaylist.Models.AddSongsViewModel
+
+@{
+    ViewData["Title"] = "Add Songs to Playlist";
+}
+
+<h2 class="mb-4">Add Songs to @Model.PlaylistName</h2>
+
+<div class="playlist-details mb-4">
+    <p><strong>Playlist Name:</strong> @Model.PlaylistName</p>
+    <img src="@Model.ImageUrl" alt="Playlist Image" style="max-width: 200px;" />
+</div>
+
+<h3 class="mb-3">Songs in Playlist</h3>
+
+@if (Model.Songs != null && Model.Songs.Any())
+{
+    <div class="list-group">
+        @foreach (var song in Model.Songs)
+        {
+            <div class="list-group-item d-flex align-items-center">
+                <img src="@song.ImageUrl" alt="Song Image" style="width: 50px; height: 50px; object-fit: cover; margin-right: 15px;" />
+
+                <div class="flex-grow-1">
+                    <strong>@song.Name</strong><br />
+                    <small>Artist: @song.Artist | Album: @song.Album | Duration: @song.Duration</small>
+                </div>
+
+                <div>
+                    <a asp-action="EditSong" asp-route-songId="@song.Id" class="btn btn-primary btn-sm mr-2">Edit</a>
+                    <form asp-action="RemoveSongFromPlaylist" method="post" style="display:inline;">
+                        <input type="hidden" name="playlistId" value="@Model.PlaylistId" />
+                        <input type="hidden" name="songUri" value="@song.SpotifyUri" />
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No songs added to this playlist yet.</p>
+}
+
+<h3 class="mt-5">Add a New Song</h3>
+<form asp-action="AddSongToPlaylist" method="post">
+    <input type="hidden" name="playlistId" value="@Model.PlaylistId" />
+    <div class="form-group">
+        <label for="songUri">Spotify URI of Song</label>
+        <input type="text" name="songUri" class="form-control" placeholder="spotify:track:TRACK_ID" />
+    </div>
+    <button type="submit" class="btn btn-success">Add Song</button>
+</form>
+
+<a asp-action="Playlists" class="btn btn-secondary mt-3">Back to Playlists</a>

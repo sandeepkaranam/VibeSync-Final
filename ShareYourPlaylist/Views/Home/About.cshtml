@@ -1,0 +1,173 @@
+﻿@{
+    ViewData["Title"] = "About Us";
+}
+
+<h2 style="text-align: center; margin-bottom: 40px; font-size: 28px;">About Us</h2>
+
+<div class="team-container">
+    <!-- Team Member 1 -->
+    <div class="team-card">
+        <img src="/images/akshitha.jpg" alt="Akshitha Katta" class="profile-picture">
+        <h3>Akshitha Katta</h3>
+        <p class="role">Front-End Developer</p>
+        <p class="bio">I am a Master’s student at the University of South Florida with over two years of experience as a Data Analyst, specializing in front-end development.</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/akshitha-katta-6610511ba/" rel="nofollow noreferrer">
+                <img src="/images/linkedin_icon.jpg">
+            </a>
+            <a href="https://github.com/KattaAkki" rel="nofollow noreferrer">
+                <img src="/images/git_icon.jpg">
+            </a>
+        </div>
+    </div>
+
+    <!-- Team Member 2 -->
+    <div class="team-card">
+        <img src="/images/amulya.jpg" alt="Amulya Adula" class="profile-picture">
+        <h3>Amulya Adula</h3>
+        <p class="role">Web Designer</p>
+        <p class="bio">Pursuing a master’s at the University of South Florida, with expertise in data analysis, and a passion for web design and user experience.</p>
+        <div class="social-links">
+            <a href="http://www.linkedin.com/in/amulya-adula" rel="nofollow noreferrer">
+                <img src="/images/linkedin_icon.jpg">
+            </a>
+            <a href="https://github.com/AdulaAmulya" rel="nofollow noreferrer">
+                <img src="/images/git_icon.jpg">
+            </a>
+        </div>
+    </div>
+
+    <!-- Team Member 3 -->
+    <div class="team-card">
+        <img src="/images/sandeep.jpg" alt="Sandeep Karanam" class="profile-picture">
+        <h3>Sandeep Karanam</h3>
+        <p class="role">Backend Developer</p>
+        <p class="bio">Software engineer specializing in data analysis, ETL development, and cloud integration with Python and SQL, currently studying at USF.</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/sandeep-karanam-831b36151/" rel="nofollow noreferrer">
+                <img src="/images/linkedin_icon.jpg">
+            </a>
+            <a href="https://github.com/sandeepkaranam" rel="nofollow noreferrer">
+                <img src="/images/git_icon.jpg">
+            </a>
+        </div>
+    </div>
+
+    <!-- Team Member 4 -->
+    <div class="team-card">
+        <img src="/images/abhiram.jpeg" alt="Thumpudi Seshasai Durga Abhiram" class="profile-picture">
+        <h3>Thumpudi Seshasai Durga Abhiram</h3>
+        <p class="role">UI Specialist</p>
+        <p class="bio">Aspiring software quality engineer at USF, skilled in data visualization tools with experience in enhancing UI functionality.</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/t-s-d-abhiram/" rel="nofollow noreferrer">
+                <img src="/images/linkedin_icon.jpg">
+            </a>
+            <a href="https://github.com/sober-zappy" rel="nofollow noreferrer">
+                <img src="/images/git_icon.jpg">
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- GitHub Repository Button -->
+<div style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
+    <a href="https://github.com/sandeepkaranam/VibeSync-Final" target="_blank" class="btn btn-success" style="font-weight: bold;">
+        View GitHub Repository
+    </a>
+</div>
+
+<!-- ERD Diagram -->
+<div style="text-align: center; margin-bottom: 40px;">
+    <img src="/images/VibeSync ERD.png" alt="VibeSync ERD Diagram" style="max-width: 80%; height: auto; border: 2px solid #28a745; border-radius: 8px;">
+</div>
+
+<!-- Styles for Team Page -->
+<style>
+    /* Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Main Container Styling */
+    .team-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+    }
+
+    /* Team Member Card */
+    .team-card {
+        background-color: #1a1a1a;
+        border-radius: 15px;
+        width: 45%;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .team-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Profile Picture */
+        .team-card img.profile-picture {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            margin: 0 auto 20px; /* Center the image horizontally and add bottom margin */
+            border: 3px solid #28a745;
+            object-fit: cover;
+        }
+
+        /* Name and Role */
+        .team-card h3 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .team-card p.role {
+            font-size: 16px;
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        /* Bio */
+        .team-card p.bio {
+            font-size: 15px;
+            color: #ddd;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+    /* Social Links */
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: auto;
+        padding-top: 15px;
+    }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+</style>

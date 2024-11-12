@@ -1,0 +1,217 @@
+﻿@using System.Text.Json
+@model ShareYourPlaylist.Models.TrendsViewModel
+
+@{
+    ViewData["Title"] = "Trends";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ShareYourPlaylist</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="background-color: #000; color: #fff;">
+    <div class="container mt-5 mb-5" style="padding-bottom: 60px;">
+
+        <!-- Followers Count for Top Playlists (Bar Chart) -->
+        <h2 class="text-center" style="color: #fff;">Followers Count for Top Playlists</h2>
+        <div style="position: relative; height: 450px; width: 100%; background-color: #000;">
+            <canvas id="followersChart"></canvas>
+        </div>
+
+        <!-- Most Viewed Playlists (Line Chart) -->
+        <h2 class="text-center mt-5" style="color: #fff;">Most Viewed Playlists</h2>
+        <div style="position: relative; height: 450px; width: 100%; background-color: #000;">
+            <canvas id="mostViewedPlaylistsChart"></canvas>
+        </div>
+
+        <!-- Most Played Songs (Pie Chart) -->
+        <h2 class="text-center mt-5" style="color: #fff;">Most Played Songs</h2>
+        <div style="display: flex; justify-content: center; align-items: center; background-color: #000;">
+            <canvas id="mostPlayedSongsChart" style="max-width: 400px; max-height: 400px;"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Followers Count for Top Playlists (Bar Chart)
+        const followersChart = new Chart(document.getElementById('followersChart'), {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(JsonSerializer.Serialize(Model.PlaylistFollowersData.Select(p => p.Name))),
+                datasets: [{
+                    label: 'Followers',
+                    data: @Html.Raw(JsonSerializer.Serialize(Model.PlaylistFollowersData.Select(p => p.FollowersCount))),
+                    backgroundColor: 'rgba(30, 215, 96, 0.7)', // Spotify Green
+                    borderColor: 'rgba(30, 215, 96, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            color: "#fff",
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Followers',
+                            color: '#fff',
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            color: "#fff",
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: "#fff",
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Data for Most Viewed Playlists (Line Chart)
+        const mostViewedPlaylistsData = {
+            labels: ["Top Hits", "Classic Rock", "Pop Classics", "Workout Beats", "Chill Vibes"],
+            datasets: [{
+                label: "View Count",
+                data: [300, 250, 200, 180, 150],
+                fill: false,
+                borderColor: "#36A2EB",
+                backgroundColor: "#36A2EB",
+                tension: 0.1
+            }]
+        };
+
+        // Config for Most Viewed Playlists (Line Chart)
+        const mostViewedPlaylistsChart = new Chart(document.getElementById('mostViewedPlaylistsChart'), {
+            type: 'line',
+            data: mostViewedPlaylistsData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: "#fff",
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Most Viewed Playlists',
+                        color: '#fff',
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: "#fff",
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Views',
+                            color: '#fff',
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            color: "#fff",
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Data for Most Played Songs (Pie Chart)
+        const mostPlayedSongsData = {
+            labels: ["Blinding Lights", "Shape of You", "Someone You Loved", "As It Was", "Sunflower"],
+            datasets: [{
+                label: "Streams Count",
+                data: [4554338444, 4089701496, 3668501206, 3625525922, 3589047706]
+,
+                backgroundColor: [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56",
+                    "#4BC0C0",
+                    "#9966FF"
+                ]
+            }]
+        };
+
+        // Config for Most Played Songs (Pie Chart)
+        const mostPlayedSongsChart = new Chart(document.getElementById('mostPlayedSongsChart'), {
+            type: 'pie',
+            data: mostPlayedSongsData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: "#fff",
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Most Played Songs',
+                        color: '#fff',
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
